@@ -6,7 +6,7 @@
     "url": "https://github.com/parro-it/debug-menu/issues"
   },
   "version": "0.0.1",
-  "main": "src/index.js"
+  "main": "src/index.js",
   "author": "andrea@parro.it",
   "scripts": {
     "release-minor": "release-minor",
@@ -17,5 +17,6 @@
   "eslintConfig": {
     "extends": "devenv"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": ["electron", "debug", "inspect", "element"]
 }
