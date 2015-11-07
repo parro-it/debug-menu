@@ -1,4 +1,4 @@
-test
+test.js
 *.sublime-*
 .gitignore
 .editorconfig
