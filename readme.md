@@ -24,6 +24,8 @@ npm install --save-dev debug-menu
 Require this module only in renderer process code.
 BrowserWindow instance has to be opened with node integration
 enabled.
+We usually load this module only if `DEBUG` environment is defined, to avoid app end users inadvertently open dev tools.
+
 
 ```javascript
   const debugMenu = require('debug-menu');
