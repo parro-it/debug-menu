@@ -2,6 +2,8 @@
 
 Chromium-like debugging context menu for electron.
 
+This module was extracted from [electron-debug](https://github.com/sindresorhus/electron-debug) to keep it focused on it's main features.
+
 [![NPM module](https://img.shields.io/npm/v/debug-menu.svg)](https://npmjs.org/package/debug-menu)
 [![NPM downloads](https://img.shields.io/npm/dt/debug-menu.svg)](https://npmjs.org/package/debug-menu)
 
@@ -24,6 +26,7 @@ npm install --save-dev debug-menu
 Require this module only in renderer process code.
 BrowserWindow instance has to be opened with node integration
 enabled.
+
 We usually load this module only if `DEBUG` environment is defined, to avoid app end users inadvertently open dev tools.
 
 
