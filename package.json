@@ -1,21 +1,15 @@
 {
   "name": "debug-menu",
-  "description": "Chromium-like debugging context menu for electron",
-  "repository": "https://github.com/parro-it/debug-menu.git",
-  "bugs": {
-    "url": "https://github.com/parro-it/debug-menu/issues"
-  },
   "version": "0.1.1",
-  "main": "src/index.js",
+  "description": "Chrome-like \"inspect element\" context-menu",
+  "repository": "parro-it/debug-menu",
   "author": "andrea@parro.it",
   "scripts": {
-    "release-minor": "release-minor",
-    "release-patch": "release-patch",
-    "lint": "lint",
-    "prepublish": "lint"
+    "test": "eslint .",
+    "start": "electron test.js"
   },
   "eslintConfig": {
-    "extends": "devenv"
+    "extends": "eslint-config-devenv"
   },
   "license": "MIT",
   "keywords": [
@@ -23,5 +17,6 @@
     "debug",
     "inspect",
     "element"
-  ]
+  ],
+  "files": ["index.js"]
 }

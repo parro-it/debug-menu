@@ -1,17 +1,14 @@
 'use strict';
-const remote = require('remote');
-const Menu = remote.require('menu');
-const MenuItem = remote.require('menu-item');
-const BrowserWindow = remote.require('browser-window');
+const remote = require('electron').remote;
 
 let rightClickPos = null;
 
-const menu = new Menu();
+const menu = new remote.Menu();
 
-menu.append(new MenuItem({
+menu.append(new remote.MenuItem({
   label: 'Inspect element',
   click: () => {
-    BrowserWindow
+    remote.BrowserWindow
       .getFocusedWindow()
       .inspectElement(rightClickPos.x, rightClickPos.y);
   }

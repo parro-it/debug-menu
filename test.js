@@ -1,15 +1,14 @@
 'use strict';
-const app = require('app');
-const BrowserWindow = require('browser-window');
+const electron = require('electron');
 
-app.on('ready', () => {
-  const win = new BrowserWindow({
+electron.app.on('ready', () => {
+  const win = new electron.BrowserWindow({
     show: true
   });
 
   win.webContents.executeJavaScript(`
-    require('${__dirname}/src/index').install();
+    require('${__dirname}').install();
   `);
 
-  win.loadUrl('https://google.com');
+  win.loadURL('https://google.com');
 });
