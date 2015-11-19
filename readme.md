@@ -4,7 +4,7 @@ Chrome-like "inspect element" context-menu for [Electron](http://electron.atom.i
 
 > This module was extracted from [electron-debug](https://github.com/sindresorhus/electron-debug) to keep it focused on its main features.
 
-[![Travis Build Status](https://img.shields.io/travis/parro-it/electron-localshortcut.svg)](http://travis-ci.org/parro-it/electron-localshortcut)
+[![Travis Build Status](https://img.shields.io/travis/parro-it/debug-menu.svg)](http://travis-ci.org/parro-it/debug-menu)
 [![npm module](https://img.shields.io/npm/v/debug-menu.svg)](https://npmjs.org/package/debug-menu)
 [![npm downloads](https://img.shields.io/npm/dt/debug-menu.svg)](https://npmjs.org/package/debug-menu)
 
