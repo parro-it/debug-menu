@@ -1,6 +1,6 @@
 {
   "name": "debug-menu",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Chrome-like \"inspect element\" context-menu",
   "repository": "parro-it/debug-menu",
   "author": "andrea@parro.it",
@@ -11,9 +11,9 @@
   "eslintConfig": {
     "extends": "js",
     "env": {
-        "browser": true,
-        "node": true,
-        "es6": true
+      "browser": true,
+      "node": true,
+      "es6": true
     }
   },
   "license": "MIT",
