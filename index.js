@@ -1,4 +1,5 @@
 'use strict';
+
 const remote = require('electron').remote;
 
 let rightClickPos = null;
@@ -8,7 +9,9 @@ const menu = new remote.Menu();
 menu.append(new remote.MenuItem({
   label: 'Inspect element',
   click: () => {
-    remote.getCurrentWindow().inspectElement(rightClickPos.x, rightClickPos.y);
+    remote
+      .getCurrentWindow()
+      .inspectElement(rightClickPos.x, rightClickPos.y);
   }
 }));
 

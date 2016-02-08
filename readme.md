@@ -43,8 +43,7 @@ debugMenu.uninstall();  // deactivate context menu
 
 ### debugMenu.install()
 
-Activate context menu. This method add a listener on `window` object
-`contextmenu` event.
+Activate context menu. This method add a listener on `window` object `contextmenu` event.
 
 ### debugMenu.uninstall()
 
@@ -59,7 +58,7 @@ The debug [Menu](http://electron.atom.io/docs/latest/api/menu/) object instance.
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Andrea Parodi
+Copyright (c) 2016 Andrea Parodi
 
 
 
