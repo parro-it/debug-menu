@@ -9,7 +9,12 @@
     "start": "electron test.js"
   },
   "eslintConfig": {
-    "extends": "eslint-config-devenv"
+    "extends": "js",
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    }
   },
   "license": "MIT",
   "keywords": [
@@ -20,5 +25,10 @@
   ],
   "files": [
     "index.js"
-  ]
+  ],
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.7",
+    "eslint": "^1.10.3",
+    "eslint-config-js": "^3.1.0"
+  }
 }
