@@ -8,16 +8,14 @@ const menu = new remote.Menu();
 menu.append(new remote.MenuItem({
   label: 'Inspect element',
   click: () => {
-    remote.BrowserWindow
-      .getFocusedWindow()
-      .inspectElement(rightClickPos.x, rightClickPos.y);
+    remote.getCurrentWindow().inspectElement(rightClickPos.x, rightClickPos.y);
   }
 }));
 
 function onContextMenu(e) {
   e.preventDefault();
   rightClickPos = {x: e.x, y: e.y};
-  menu.popup();
+  menu.popup(remote.getCurrentWindow());
 }
 
 exports.install = () => {
