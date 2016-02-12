@@ -1,17 +1,26 @@
 'use strict';
 
-const remote = require('electron').remote;
+const electron = require('electron');
 
+let menu = null;
 let rightClickPos = null;
 
 
-function inpectElementMenu(Menu, MenuItem) {
+function inpectElementMenu() {
+  const Menu = process.type === 'renderer'
+    ? electron.remote.Menu
+    : electron.Menu;
+
+  const MenuItem = process.type === 'renderer'
+    ? electron.remote.MenuItem
+    : electron.MenuItem;
+
   const mnu = new Menu();
 
   mnu.append(new MenuItem({
     label: 'Inspect element',
     click: () => {
-      remote
+      electron.remote
         .getCurrentWindow()
         .inspectElement(rightClickPos.x, rightClickPos.y);
     }
@@ -20,16 +29,13 @@ function inpectElementMenu(Menu, MenuItem) {
   return mnu;
 }
 
-
-const menu = inpectElementMenu(
-  remote.Menu,
-  remote.MenuItem
-);
-
 function onContextMenu(e) {
+  if (menu === null) {
+    menu = inpectElementMenu();
+  }
   e.preventDefault();
   rightClickPos = {x: e.x, y: e.y};
-  menu.popup(remote.getCurrentWindow());
+  menu.popup(electron.remote.getCurrentWindow());
 }
 
 exports.install = () => {
@@ -40,4 +46,35 @@ exports.uninstall = () => {
   window.removeEventListener('contextmenu', onContextMenu);
 };
 
-exports.menu = menu;
+exports.windowDebugMenu = () => {
+  const Menu = electron.Menu;
+  return Menu.buildFromTemplate([
+    {
+      label: 'Devtools',
+      submenu: [{
+        label: 'Open detached'
+      }, {
+        label: 'Open right'
+      }, {
+        label: 'Open bottom'
+      }, {
+        label: 'Toggle'
+      }]
+    }, {
+      label: 'Current window',
+      submenu: [{
+        label: 'Close'
+      }, {
+        label: 'Reload'
+      }]
+    }, {
+      label: 'App',
+      submenu: [{
+        label: 'Quit'
+      }, {
+        label: 'Exit'
+      }]
+    }
+  ]);
+};
+
