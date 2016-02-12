@@ -4,16 +4,27 @@ const remote = require('electron').remote;
 
 let rightClickPos = null;
 
-const menu = new remote.Menu();
 
-menu.append(new remote.MenuItem({
-  label: 'Inspect element',
-  click: () => {
-    remote
-      .getCurrentWindow()
-      .inspectElement(rightClickPos.x, rightClickPos.y);
-  }
-}));
+function inpectElementMenu(Menu, MenuItem) {
+  const mnu = new Menu();
+
+  mnu.append(new MenuItem({
+    label: 'Inspect element',
+    click: () => {
+      remote
+        .getCurrentWindow()
+        .inspectElement(rightClickPos.x, rightClickPos.y);
+    }
+  }));
+
+  return mnu;
+}
+
+
+const menu = inpectElementMenu(
+  remote.Menu,
+  remote.MenuItem
+);
 
 function onContextMenu(e) {
   e.preventDefault();
