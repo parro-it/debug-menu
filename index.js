@@ -1,6 +1,7 @@
 'use strict';
 
 const electron = require('electron');
+const electronDebug = require('electron-debug');
 
 let menu = null;
 let rightClickPos = null;
@@ -46,26 +47,53 @@ exports.uninstall = () => {
   window.removeEventListener('contextmenu', onContextMenu);
 };
 
-exports.windowDebugMenu = () => {
+exports.windowDebugMenu = _win => {
+  const win = _win || electron.BrowserWindow.getFocusedWindow();
   const Menu = electron.Menu;
+
   return Menu.buildFromTemplate([
     {
       label: 'Devtools',
       submenu: [{
-        label: 'Open detached'
+        label: 'Open detached',
+        click: () => {
+          electronDebug.devTools(win);
+        }
       }, {
-        label: 'Open right'
+        label: 'Open right',
+        click: () => {
+          electron.dialog.showErrorBox(
+            'Not implemented',
+            'Feature not implemented'
+          );
+        }
       }, {
-        label: 'Open bottom'
+        label: 'Open bottom',
+        click: () => {
+          electron.dialog.showErrorBox(
+            'Not implemented',
+            'Feature not implemented'
+          );
+        }
       }, {
-        label: 'Toggle'
+        label: 'Toggle',
+        click: () => {
+          electron.dialog.showErrorBox(
+            'Not implemented',
+            'Feature not implemented'
+          );
+        }
       }]
     }, {
       label: 'Current window',
       submenu: [{
-        label: 'Close'
+        label: 'Close',
+
       }, {
-        label: 'Reload'
+        label: 'Reload',
+        click: () => {
+          electronDebug.refresh(win);
+        }
       }]
     }, {
       label: 'App',
