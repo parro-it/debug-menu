@@ -1,7 +1,6 @@
 'use strict';
 
 const electron = require('electron');
-const electronDebug = require('electron-debug');
 
 let menu = null;
 let rightClickPos = null;
@@ -48,6 +47,7 @@ exports.uninstall = () => {
 };
 
 exports.windowDebugMenu = _win => {
+  const electronDebug = require('electron-debug');
   const win = _win || electron.BrowserWindow.getFocusedWindow();
   const Menu = electron.Menu;
 
