@@ -51,7 +51,12 @@ function openDevTools(_win) {
   const win = _win || electron.BrowserWindow.getFocusedWindow();
 
   if (win) {
-    win.openDevTools();
+    if (win.webContents.isDevToolsOpened()) {
+      win.webContents.closeDevTools();
+    }
+
+    win.webContents.openDevTools();
+
   }
 }
 
