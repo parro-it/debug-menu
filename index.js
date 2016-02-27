@@ -46,6 +46,15 @@ exports.uninstall = () => {
   window.removeEventListener('contextmenu', onContextMenu);
 };
 
+
+function openDevTools(_win) {
+  const win = _win || electron.BrowserWindow.getFocusedWindow();
+
+  if (win) {
+    win.openDevTools();
+  }
+}
+
 exports.windowDebugMenu = _win => {
   const electronDebug = require('electron-debug');
   const win = _win || electron.BrowserWindow.getFocusedWindow();
@@ -58,19 +67,19 @@ exports.windowDebugMenu = _win => {
         click: () => {
           electronDebug.devTools(win);
         },
-        accelerator: 'F12'
+        accelerator: 'CmdOrCtrl+F12'
 
       }, {
         label: 'Open detached',
         click: () => {
-          electronDebug.devTools(win);
+          openDevTools(win);
         },
         accelerator: 'F12'
 
       }, {
         label: 'Open right',
         click: () => {
-          electronDebug.devTools(win);
+          openDevTools(win);
         }
       }]
     }, {
