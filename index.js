@@ -1,7 +1,6 @@
 'use strict';
 
 const electron = require('electron');
-const electronDebug = require('electron-debug');
 
 let menu = null;
 let rightClickPos = null;
@@ -48,61 +47,55 @@ exports.uninstall = () => {
 };
 
 exports.windowDebugMenu = _win => {
+  const electronDebug = require('electron-debug');
   const win = _win || electron.BrowserWindow.getFocusedWindow();
-  const Menu = electron.Menu;
 
-  return Menu.buildFromTemplate([
+  return [
     {
       label: 'Devtools',
       submenu: [{
+        label: 'Toggle',
+        click: () => {
+          electronDebug.devTools(win);
+        },
+        accelerator: 'F12'
+
+      }, {
         label: 'Open detached',
         click: () => {
           electronDebug.devTools(win);
-        }
+        },
+        accelerator: 'F12'
+
       }, {
         label: 'Open right',
         click: () => {
-          electron.dialog.showErrorBox(
-            'Not implemented',
-            'Feature not implemented'
-          );
-        }
-      }, {
-        label: 'Open bottom',
-        click: () => {
-          electron.dialog.showErrorBox(
-            'Not implemented',
-            'Feature not implemented'
-          );
-        }
-      }, {
-        label: 'Toggle',
-        click: () => {
-          electron.dialog.showErrorBox(
-            'Not implemented',
-            'Feature not implemented'
-          );
+          electronDebug.devTools(win);
         }
       }]
     }, {
       label: 'Current window',
       submenu: [{
         label: 'Close',
-
+        click: () => win.close(),
+        accelerator: 'CmdOrCtrl+Q'
       }, {
         label: 'Reload',
-        click: () => {
-          electronDebug.refresh(win);
-        }
+        click: () => electronDebug.refresh(win),
+        accelerator: 'F5'
       }]
     }, {
       label: 'App',
       submenu: [{
-        label: 'Quit'
+        label: 'Quit',
+        click: () => electron.app.quit(),
+        accelerator: 'Shift+CmdOrCtrl+Q'
       }, {
-        label: 'Exit'
+        label: 'Exit',
+        click: () => electron.app.exit(0),
+        accelerator: 'Shift+CmdOrCtrl+Esc'
       }]
     }
-  ]);
+  ];
 };
 
