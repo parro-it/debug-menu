@@ -8,28 +8,26 @@ Chrome-like "inspect element" context-menu for [Electron](http://electron.atom.i
 [![npm module](https://img.shields.io/npm/v/debug-menu.svg)](https://npmjs.org/package/debug-menu)
 [![npm downloads](https://img.shields.io/npm/dt/debug-menu.svg)](https://npmjs.org/package/debug-menu)
 
-## Context menu items
+# Context menu items
 
-### Inspect element
+## Inspect element
 
 Inspect the clicked HTML element.
 It shows DevTools if it's not already opened.
 
 
-## Install
+# Install
 
 ```
 $ npm install --save-dev debug-menu
 ```
 
-## Usage
+# Usage
 
-Require this module only in renderer process code.
-BrowserWindow instance has to be opened with node integration
-enabled.
+When you use this module in renderer process code,
+`BrowserWindow` instance need to be opened with node integration enabled.
 
 We usually load this module only if the `DEBUG` environment variable is defined, to avoid end users of the app inadvertently opening DevTools.
-
 
 ```js
 const debugMenu = require('debug-menu');
@@ -39,29 +37,50 @@ debugMenu.install();  // activate context menu
 debugMenu.uninstall();  // deactivate context menu
 ```
 
-## API
+# API
 
-### debugMenu.install()
+## debugMenu.install()
 
-Activate context menu. This method add a listener on `window` object `contextmenu` event.
+Activate context menu. This method add a listener on `window` DOM object `contextmenu` event.
 
-### debugMenu.uninstall()
+## debugMenu.uninstall()
 
 Deactivate context menu. This method remove the listener on `window` object.
 
-### debugMenu.windowDebugMenu(win);
+## debugMenu.windowDebugMenu(win);
 
 The debug [Menu](http://electron.atom.io/docs/latest/api/menu/) object template. You can use it to integrate with your own app context or `BrowserWindow` menu.
 
-#### options
+### options
 
-##### win
+#### win
 
 `BrowserWindow` instance to use for this Menu.
 
 Type: `BrowserWindow`<br>
 Default: the currently focused `BrowserWindow`.
 
+### Example
+
+```js
+  // ... require electorn module
+
+  const debugMenu = require('debug-menu');
+  const win = new BrowserWindow();
+
+  const menu = Menu.buildFromTemplate([{
+    label: 'Debug',
+    submenu: debugMenu.windowDebugMenu(win)
+  }]);
+
+  if (process.platform !== 'darwin') {
+    win.setMenu(menu);
+  } else {
+    electron.Menu.setApplicationMenu(menu);
+  }
+
+  // ... show window
+```
 
 ## License
 
