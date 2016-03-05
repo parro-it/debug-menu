@@ -49,14 +49,40 @@ exports.uninstall = () => {
 
 function openDevTools(_win) {
   const win = _win || electron.BrowserWindow.getFocusedWindow();
-
   if (win) {
     if (win.webContents.isDevToolsOpened()) {
-      win.webContents.closeDevTools();
+      /*
+      console.log('isDevToolsOpened')
+      const webContents = win.devToolsWebContents;
+      console.log('webContents',webContents)
+      const devToolsWin = electron.BrowserWindow.fromDevToolsWebContents(webContents);
+      console.log('devToolsWin',devToolsWin)
+      console.log('restore')
+
+      devToolsWin.restore();
+      console.log('focus')
+      devToolsWin.focus();
+      console.log('close')
+
+      devToolsWin.close();
+      */
+      const webContents = win.devToolsWebContents;
+      webContents.executeJavaScript(`
+        (function() {
+          console.log(1)
+          const electron = require('electron');
+          console.log(2)
+          const win = electron.remote.getCurrentWindow();
+          console.log(3)
+          win.focus();
+          console.log(4)
+          win.restore();
+          console.log(5)
+        })();
+      `);
+    } else {
+      win.webContents.openDevTools();
     }
-
-    win.webContents.openDevTools();
-
   }
 }
 
