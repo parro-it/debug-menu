@@ -30,5 +30,8 @@
     "electron-prebuilt": "^0.36.7",
     "eslint": "^1.10.3",
     "eslint-config-js": "^3.1.0"
+  },
+  "dependencies": {
+    "electron-debug": "^0.5.2"
   }
 }

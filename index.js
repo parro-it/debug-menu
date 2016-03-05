@@ -72,20 +72,14 @@ exports.windowDebugMenu = _win => {
         click: () => {
           electronDebug.devTools(win);
         },
-        accelerator: 'CmdOrCtrl+F12'
-
-      }, {
-        label: 'Open detached',
-        click: () => {
-          openDevTools(win);
-        },
         accelerator: 'F12'
 
       }, {
-        label: 'Open right',
+        label: 'Show',
         click: () => {
           openDevTools(win);
-        }
+        },
+        accelerator: 'CmdOrCtrl+F12'
       }]
     }, {
       label: 'Current window',

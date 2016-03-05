@@ -49,10 +49,9 @@ Activate context menu. This method add a listener on `window` object `contextmen
 
 Deactivate context menu. This method remove the listener on `window` object.
 
-### debugMenu.menu
+### debugMenu.windowDebugMenu
 
-The debug [Menu](http://electron.atom.io/docs/latest/api/menu/) object instance. You can use it to integrate with your own app context or system menu.
-
+The debug [Menu](http://electron.atom.io/docs/latest/api/menu/) object template. You can use it to integrate with your own app context or `BrowserWindow` menu.
 
 ## License
 
