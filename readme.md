@@ -43,6 +43,12 @@ debugMenu.uninstall();  // deactivate context menu
 
 Activate context menu. This method add a listener on `window` DOM object `contextmenu` event.
 
+## debugMenu.middleware
+
+Expose a middleware context menu that can be mounted with [electron-contextmenu-middleware](https://github.com/parro-it/electron-contextmenu-middleware). See [related example](#middleware-example)
+
+
+
 ## debugMenu.uninstall()
 
 Deactivate context menu. This method remove the listener on `window` object.
@@ -51,16 +57,14 @@ Deactivate context menu. This method remove the listener on `window` object.
 
 The debug [Menu](http://electron.atom.io/docs/latest/api/menu/) object template. You can use it to integrate with your own app context or `BrowserWindow` menu.
 
-### options
-
-#### win
+### win
 
 `BrowserWindow` instance to use for this Menu.
 
 Type: `BrowserWindow`<br>
 Default: the currently focused `BrowserWindow`.
 
-### Example
+# Example
 
 ```js
   // ... require electorn module
@@ -82,7 +86,25 @@ Default: the currently focused `BrowserWindow`.
   // ... show window
 ```
 
-## License
+# Middleware example
+
+```js
+  const debugMenu = require('debug-menu').middleware;
+  const context = require('electron-contextmenu-middleware');
+
+  context.use(debugMenu);
+
+  context.activate();
+```
+
+# Related projects
+
+* [electron-contextmenu-middleware](https://github.com/parro-it/electron-contextmenu-middleware) - Build `electron` context menus composing multiple middlewares functions.
+
+* [electron-input-menu](https://github.com/parro-it/electron-input-menu) - Context menu for [electron](https://github.com/atom/electron) input elements.
+
+
+# License
 
 The MIT License (MIT)
 

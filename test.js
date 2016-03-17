@@ -25,4 +25,10 @@ electron.app.on('ready', () => {
   `);
 
   win.loadURL('https://google.com');
+
+  const win2 = new electron.BrowserWindow({
+    show: true
+  });
+
+  win2.loadURL('file://' + __dirname + '/example.html');
 });
