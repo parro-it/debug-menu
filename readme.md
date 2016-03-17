@@ -57,7 +57,9 @@ Deactivate context menu. This method remove the listener on `window` object.
 
 The debug [Menu](http://electron.atom.io/docs/latest/api/menu/) object template. You can use it to integrate with your own app context or `BrowserWindow` menu.
 
-### win
+### Arguments
+
+* win
 
 `BrowserWindow` instance to use for this Menu.
 

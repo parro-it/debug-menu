@@ -3,20 +3,19 @@
 const electron = require('electron');
 
 let menu = null;
-let rightClickPos = null;
 
-function inpectMenuTemplate() {
+function inpectMenuTemplate(pos) {
   return {
     label: 'Inspect element',
     click: () => {
       electron.remote
         .getCurrentWindow()
-        .inspectElement(rightClickPos.x, rightClickPos.y);
+        .inspectElement(pos.x, pos.y);
     }
   };
 }
 
-function inpectElementMenu() {
+function inpectElementMenu(pos) {
   const Menu = process.type === 'renderer'
     ? electron.remote.Menu
     : electron.Menu;
@@ -27,23 +26,24 @@ function inpectElementMenu() {
 
   const mnu = new Menu();
 
-  mnu.append(new MenuItem(inpectMenuTemplate()));
+  mnu.append(new MenuItem(
+    inpectMenuTemplate(pos)
+  ));
 
   return mnu;
 }
 
 function onContextMenu(e) {
   if (menu === null) {
-    menu = inpectElementMenu();
+    menu = inpectElementMenu({x: e.x, y: e.y});
   }
   e.preventDefault();
-  rightClickPos = {x: e.x, y: e.y};
   menu.popup(electron.remote.getCurrentWindow());
 }
 
 
 exports.middleware = (ctx, next) => {
-  ctx.menu.push(inpectMenuTemplate());
+  ctx.menu.push(inpectMenuTemplate(ctx.click));
   next();
 };
 
