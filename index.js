@@ -5,11 +5,13 @@ const electron = require('electron');
 let menu = null;
 
 function inpectMenuTemplate(pos) {
+  const {remote} = require('electron');
+  const {webContents} = remote;
+
   return {
     label: 'Inspect element',
     click: () => {
-      electron.remote
-        .getCurrentWindow()
+      webContents.getFocusedWebContents()
         .inspectElement(pos.x, pos.y);
     }
   };

@@ -27,8 +27,8 @@
     "index.js"
   ],
   "devDependencies": {
+    "electron": "^1.4.12",
     "electron-contextmenu-middleware": "^1.0.1",
-    "electron-prebuilt": "^0.36.7",
     "eslint": "^1.10.3",
     "eslint-config-js": "^3.1.0"
   },
