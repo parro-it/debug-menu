@@ -4,13 +4,13 @@ const electron = require('electron');
 
 let menu = null;
 
-function inpectMenuTemplate(pos) {
+function inpectMenuTemplate(elm, pos) {
   return {
     label: 'Inspect element',
     click: () => {
-      electron.remote
-        .getCurrentWindow()
-        .inspectElement(pos.x, pos.y);
+        const win = elm.tagName.toLowerCase() === 'webview' ?
+            elm : electron.remote.getCurrentWindow()
+        win.inspectElement(pos.x, pos.y);
     }
   };
 }
@@ -43,7 +43,7 @@ function onContextMenu(e) {
 
 
 exports.middleware = (ctx, next) => {
-  ctx.menu.push(inpectMenuTemplate(ctx.click));
+  ctx.menu.push(inpectMenuTemplate(ctx.elm, ctx.click));
   next();
 };
 
