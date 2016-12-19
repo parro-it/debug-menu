@@ -4,18 +4,14 @@ const electron = require('electron');
 
 let menu = null;
 
-function inpectMenuTemplate(elm, pos) {
+function inpectMenuTemplate(pos, elm) {
   return {
     label: 'Inspect element',
-    click: () => {
-        const win = elm.tagName.toLowerCase() === 'webview' ?
-            elm : electron.remote.getCurrentWindow()
-        win.inspectElement(pos.x, pos.y);
-    }
+    click: () => (elm || electron.remote.getCurrentWindow()).inspectElement(pos.x, pos.y)
   };
 }
 
-function inpectElementMenu(pos) {
+function inpectElementMenu(pos, elm) {
   const Menu = process.type === 'renderer'
     ? electron.remote.Menu
     : electron.Menu;
@@ -27,7 +23,7 @@ function inpectElementMenu(pos) {
   const mnu = new Menu();
 
   mnu.append(new MenuItem(
-    inpectMenuTemplate(pos)
+    inpectMenuTemplate(pos, elm)
   ));
 
   return mnu;
@@ -35,7 +31,7 @@ function inpectElementMenu(pos) {
 
 function onContextMenu(e) {
   if (menu === null) {
-    menu = inpectElementMenu({x: e.x, y: e.y});
+    menu = inpectElementMenu({x: e.x, y: e.y}, e.target);
   }
   e.preventDefault();
   menu.popup(electron.remote.getCurrentWindow());
@@ -43,7 +39,7 @@ function onContextMenu(e) {
 
 
 exports.middleware = (ctx, next) => {
-  ctx.menu.push(inpectMenuTemplate(ctx.elm, ctx.click));
+  ctx.menu.push(inpectMenuTemplate(ctx.click, ctx.elm));
   next();
 };
 
