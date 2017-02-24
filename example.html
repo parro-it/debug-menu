@@ -2,27 +2,29 @@
 <html>
   <head>
     <title>example</title>
-
-    <script>
-    const context = require('electron-contextmenu-middleware');
-    const debugMenu = require('.').middleware;
-
-    context.use(debugMenu);
-
-    context.use((ctx, next) => {
-      ctx.menu.push({
-        label: 'Test 2',
-        click: () => alert('Test 2 clicked')
-      });
-      next();
-    });
-
-    context.activate();
-    </script>
   </head>
 
   <body>
     <input type="text">
     <h1>Hola</h1>
+    <webview src="example-webview.html"></webview>
+    <script>
+      'use strict';
+      const context = require('electron-contextmenu-middleware');
+      const webContents = require('electron').remote.webContents;
+      const debugMenu = require('.').middleware;
+
+      context.use(debugMenu);
+
+      context.use((ctx, next) => {
+        ctx.menu.push({
+          label: 'Test 2',
+          click: () => alert('Test 2 clicked')
+        });
+        next();
+      });
+
+      context.activate();
+    </script>
   </body>
 </html>
