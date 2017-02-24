@@ -29,9 +29,15 @@ function inpectElementMenu(pos, elm) {
   return mnu;
 }
 
+function ifInspectable(elm) {
+  if (elm && (typeof elm.inspectElement === 'function')) {
+    return elm;
+  }
+}
+
 function onContextMenu(e) {
   if (menu === null) {
-    menu = inpectElementMenu({x: e.x, y: e.y}, e.target);
+    menu = inpectElementMenu({x: e.x, y: e.y}, ifInspectable(e.target));
   }
   e.preventDefault();
   menu.popup(electron.remote.getCurrentWindow());
@@ -39,7 +45,7 @@ function onContextMenu(e) {
 
 
 exports.middleware = (ctx, next) => {
-  ctx.menu.push(inpectMenuTemplate(ctx.click, ctx.elm));
+  ctx.menu.push(inpectMenuTemplate(ctx.click, ifInspectable(ctx.elm)));
   next();
 };
 
