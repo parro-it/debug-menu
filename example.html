@@ -2,11 +2,19 @@
 <html>
   <head>
     <title>example</title>
+  </head>
 
-    <script>
-    const context = require('electron-contextmenu-middleware');
+  <body>
+    <input type="text">
+    <h1>Hola</h1>
+    <webview src="example-webview.html"></webview>
+  </body>
+  <script>
+    // const context = require('electron-contextmenu-middleware');
     const debugMenu = require('.').middleware;
-
+    const {remote} = require('electron');
+    const {webContents} = remote;
+/*
     context.use(debugMenu);
 
     context.use((ctx, next) => {
@@ -17,13 +25,22 @@
       next();
     });
 
-    context.activate();
-    </script>
-  </head>
+    context.activate();*/
 
-  <body>
-    <input type="text">
-    <h1>Hola</h1>
-    <webview src="example-webview.html"></webview>
-  </body>
+    const webviews = document.querySelectorAll('webview');
+    webviews.forEach(wv => {
+      wv.addEventListener('dom-ready', () => {
+        for (let wc of webContents.getAllWebContents()) {
+          // Check if `wc` belongs to a webview in the `win` window.
+          if (wc.id === wv.guestinstance) {
+            wc.executeJavaScript(`
+              require('${__dirname}').install();
+            `);
+          }
+        }
+
+
+      });
+    });
+  </script>
 </html>

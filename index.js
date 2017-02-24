@@ -11,8 +11,8 @@ function inpectMenuTemplate(pos) {
   return {
     label: 'Inspect element',
     click: () => {
-      webContents.getFocusedWebContents()
-        .inspectElement(pos.x, pos.y);
+      const wc = webContents.getFocusedWebContents();
+      wc.inspectElement(pos.x, pos.y);
     }
   };
 }
@@ -36,6 +36,7 @@ function inpectElementMenu(pos) {
 }
 
 function onContextMenu(e) {
+  debugger
   if (menu === null) {
     menu = inpectElementMenu({x: e.x, y: e.y});
   }
@@ -51,7 +52,9 @@ exports.middleware = (ctx, next) => {
 
 
 exports.install = () => {
+
   window.addEventListener('contextmenu', onContextMenu);
+
 };
 
 exports.uninstall = () => {

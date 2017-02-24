@@ -1,9 +1,9 @@
 'use strict';
-const electron = require('electron');
+const {BrowserWindow, webContents, app} = require('electron');
 const debugMenu = require('.');
 
-electron.app.on('ready', () => {
-  const win = new electron.BrowserWindow({
+app.on('ready', () => {
+  /*const win = new electron.BrowserWindow({
     show: true
   });
 
@@ -25,9 +25,13 @@ electron.app.on('ready', () => {
   `);
 
   win.loadURL('https://google.com');
-
-  const win2 = new electron.BrowserWindow({
+*/
+  const win2 = new BrowserWindow({
     show: true
+  });
+
+  win2.webContents.on('context-menu', (e, {x, y}) => {
+    console.log({x, y})
   });
 
   win2.loadURL('file://' + __dirname + '/example.html');
