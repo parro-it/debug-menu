@@ -1,5 +1,7 @@
 # debug-menu
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/parro-it/debug-menu.svg)](https://greenkeeper.io/)
+
 Chrome-like "inspect element" context-menu for [Electron](http://electron.atom.io)
 
 > This module was extracted from [electron-debug](https://github.com/sindresorhus/electron-debug) to keep it focused on its main features.
