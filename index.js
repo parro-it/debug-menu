@@ -52,7 +52,11 @@ function onContextMenu(e) {
 }
 
 exports.middleware = (ctx, next) => {
-	ctx.menu.push(inspectMenuTemplate(ctx.click, ifInspectable(ctx.elm)));
+	posX = ctx.click.x;
+	posY = ctx.click.y;
+	elm = ifInspectable(ctx.elm);
+	
+	ctx.menu.push(inspectMenuTemplate());
 	next();
 };
 
