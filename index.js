@@ -55,7 +55,7 @@ exports.middleware = (ctx, next) => {
 	posX = ctx.click.x;
 	posY = ctx.click.y;
 	elm = ifInspectable(ctx.elm);
-	
+
 	ctx.menu.push(inspectMenuTemplate());
 	next();
 };
