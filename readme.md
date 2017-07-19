@@ -71,7 +71,7 @@ Default: the currently focused `BrowserWindow`.
 # Example
 
 ```js
-  // ... require electorn module
+  // ... require electron module
 
   const debugMenu = require('debug-menu');
   const win = new BrowserWindow();
