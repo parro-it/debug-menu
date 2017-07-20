@@ -1,6 +1,6 @@
 {
   "name": "debug-menu",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Chrome-like \"inspect element\" context-menu",
   "repository": "parro-it/debug-menu",
   "author": "andrea@parro.it",
