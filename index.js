@@ -3,15 +3,18 @@
 const electron = require('electron');
 
 let menu = null;
+let posX = 0;
+let posY = 0;
+let elm = null;
 
-function inpectMenuTemplate(pos, elm) {
+function inspectMenuTemplate() {
 	return {
 		label: 'Inspect element',
-		click: () => (elm || electron.remote.getCurrentWindow()).inspectElement(pos.x, pos.y)
+		click: () => (elm || electron.remote.getCurrentWindow()).inspectElement(posX, posY)
 	};
 }
 
-function inpectElementMenu(pos, elm) {
+function inspectElementMenu() {
 	const Menu = process.type === 'renderer' ?
 		electron.remote.Menu :
 		electron.Menu;
@@ -23,7 +26,7 @@ function inpectElementMenu(pos, elm) {
 	const mnu = new Menu();
 
 	mnu.append(new MenuItem(
-		inpectMenuTemplate(pos, elm)
+		inspectMenuTemplate()
 	));
 
 	return mnu;
@@ -37,14 +40,23 @@ function ifInspectable(elm) {
 
 function onContextMenu(e) {
 	if (menu === null) {
-		menu = inpectElementMenu({x: e.x, y: e.y}, ifInspectable(e.target));
+		menu = inspectElementMenu();
 	}
+
+	posX = e.x;
+	posY = e.y;
+	elm = ifInspectable(e.target);
+
 	e.preventDefault();
 	menu.popup(electron.remote.getCurrentWindow());
 }
 
 exports.middleware = (ctx, next) => {
-	ctx.menu.push(inpectMenuTemplate(ctx.click, ifInspectable(ctx.elm)));
+	posX = ctx.click.x;
+	posY = ctx.click.y;
+	elm = ifInspectable(ctx.elm);
+
+	ctx.menu.push(inspectMenuTemplate());
 	next();
 };
 
