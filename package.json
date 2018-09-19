@@ -25,6 +25,6 @@
   },
   "dependencies": {
     "electron-debug": "^1.1.0",
-    "electron-is-dev": "^0.3.0"
+    "electron-is-dev": "^1.0.0"
   }
 }
