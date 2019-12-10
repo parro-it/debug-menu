@@ -19,7 +19,7 @@
     "index.js"
   ],
   "devDependencies": {
-    "electron": "^1.6.2",
+    "electron": "^7.1.4",
     "electron-contextmenu-middleware": "^1.0.1",
     "xo": "^0.18.1"
   },
