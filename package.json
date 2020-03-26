@@ -21,7 +21,7 @@
   "devDependencies": {
     "electron": "^1.6.2",
     "electron-contextmenu-middleware": "^1.0.1",
-    "xo": "^0.18.1"
+    "xo": "^0.28.1"
   },
   "dependencies": {
     "electron-debug": "^1.1.0",
